@@ -1,9 +1,11 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, jsonify
+from flask_cors import CORS
 from datetime import datetime
 import requests
 import gtfs_realtime_pb2
 
 app = Flask(__name__)
+CORS(app)
 
 def convert_timestamp_to_readable(time):
     return datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S')
@@ -64,11 +66,6 @@ def get_mta_data():
     sorted_data = sorted(data, key=lambda x: x['minutes_until_arrival'])
 
     return sorted_data
-
-@app.route('/')
-def index():
-    transit_data = get_mta_data()
-    return render_template('index.html', data=transit_data)
 
 @app.route('/refresh')
 def refresh():
