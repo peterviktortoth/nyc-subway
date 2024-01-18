@@ -32,11 +32,21 @@ p{
   height: 60px;
   line-height: 60px;
   border-radius: 50%;
-  background-color: #FCCC0A;
   color: black;
   text-align: center;
   font-weight: bold;
   font-size: 36px;
   border: #f0f0f0;
   border-width: 3px;
+}
+
+.green-circle {
+  background-color: #00933C;
+  color: white;
+  border-color: #f0f0f0;
+  border: #f0f0f0;
+}
+
+.yellow-circle {
+  background-color: #FCCC0A;
 }

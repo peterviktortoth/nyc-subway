@@ -23,17 +23,22 @@ function App() {
     <div className="container">
       <h1>Lexington Ave - 59th St</h1>
       <div id="data-container">
-        {transitData.map((item, index) => {
-          const parts = item.message.split(' ');
-          const trainLine = parts[1]; // Assuming the train line is always the second word
-          const modifiedMessage = (
-            <>
-              {parts[0]} <span className="train-line-indicator">{trainLine}</span> {parts.slice(2).join(' ')}
-            </>
-          );
+      {transitData.map((item, index) => {
+        const parts = item.message.split(' ');
+        const trainLine = parts[1]; // Assuming the train line is always the second word
 
-          return <p key={index}>{modifiedMessage}</p>;
-        })}
+        // Determine the color class based on the train line
+        const colorClass = (trainLine === '4' || trainLine === '5' || trainLine === '6') ? 'green-circle' : 'yellow-circle';
+
+        const modifiedMessage = (
+          <>
+            {parts[0]} <span className={`train-line-indicator ${colorClass}`}>{trainLine}</span> {parts.slice(2).join(' ')}
+          </>
+        );
+
+        return <p key={index}>{modifiedMessage}</p>;
+      })}
+
       </div>
     </div>
   );
