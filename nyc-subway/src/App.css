@@ -41,8 +41,8 @@ p{
 
 .train-line-indicator {
   display: inline-block;
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
   line-height: 60px;
   border-radius: 50%;
   color: black;
@@ -56,12 +56,16 @@ p{
 .green-circle {
   background-color: #00933C;
   color: white;
-  border-color: #f0f0f0;
-  border: #f0f0f0;
+  border: 2px solid #000000; /* Example: 2px wide solid white border */
 }
 
 .yellow-circle {
   background-color: #FCCC0A;
+  border: 2px solid #000000; /* Example: 2px wide solid white border */
+}
+
+.bold-text {
+  font-weight: bold;
 }
 
 
