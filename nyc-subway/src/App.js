@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import TransitDataItem from './transitDataItem'
+
 
 function App() {
   const [transitData, setTransitData] = useState([]);
@@ -28,10 +30,10 @@ function App() {
 
   return (
     <div>
-    <header className="header">
-      <h2>Lexington Avenue - 59th Street</h2>
-      {/* Any additional header content */}
-    </header>
+      <header className="header">
+        <h2>Lexington Avenue - 59th Street</h2>
+        {/* Any additional header content */}
+      </header>
       <div className="tabs-container">
         <div className="tabs">
           {/* Tab radio buttons and labels */}
@@ -43,32 +45,18 @@ function App() {
   
           <input type="radio" id="radio-3" name="tab" value="downtown" checked={directionFilter === 'downtown'} onChange={handleDirectionChange} />
           <label htmlFor="radio-3" className="tab">Downtown</label>
-  
-          <div className="glider"></div>
         </div>
       </div>
       <div className="data-container">
-      {transitData
-    .filter(item => 
-      (directionFilter === 'all' || item.message.toLowerCase().includes(directionFilter.toLowerCase())) &&
-      item.minutes_until_arrival >= 0 // Filter out negative arrival times
-    
-      ).map((item, index) => {
-        const parts = item.message.split(' ');
-        const trainLine = parts[1]; // Assuming the train line is always the second word
-
-        // Determine the color class based on the train line
-        const colorClass = (trainLine === '4' || trainLine === '5' || trainLine === '6') ? 'green-circle' : 'yellow-circle';
-
-        const modifiedMessage = (
-          <>
-            {parts[0]} <span className={`train-line-indicator ${colorClass}`}>{trainLine}</span> {parts.slice(2).join(' ')}
-          </>
-        );
-
-        return <p key={index}>{modifiedMessage}</p>;
-      })}
-
+        {transitData
+          .filter(item => 
+            (directionFilter === 'all' || item.message.toLowerCase().includes(directionFilter.toLowerCase())) &&
+            item.minutes_until_arrival >= 0
+          )
+          .map((item, index) => (
+            <TransitDataItem key={index} item={item} /> // Corrected component usage
+          ))
+        }
       </div>
     </div>
   );
