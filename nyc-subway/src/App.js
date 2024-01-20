@@ -45,6 +45,7 @@ function App() {
   
           <input type="radio" id="radio-3" name="tab" value="downtown" checked={directionFilter === 'downtown'} onChange={handleDirectionChange} />
           <label htmlFor="radio-3" className="tab">Downtown</label>
+          <div className="glider"></div>
         </div>
       </div>
       <div className="data-container">
