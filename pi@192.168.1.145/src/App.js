@@ -52,7 +52,7 @@ function App() {
         {transitData
           .filter(item => 
             (directionFilter === 'all' || item.message.toLowerCase().includes(directionFilter.toLowerCase())) &&
-            item.minutes_until_arrival > 0
+            item.minutes_until_arrival >= 0
           )
           .map((item, index) => (
             <TransitDataItem key={index} item={item} /> // Corrected component usage
