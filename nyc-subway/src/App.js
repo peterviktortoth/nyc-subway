@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import TransitDataItem from './transitDataItem'
+import SettingsModal from './SettingsModal';
 
 
 function App() {
@@ -10,6 +11,10 @@ function App() {
   const handleDirectionChange = (event) => {
     setDirectionFilter(event.target.value);
   };
+
+  const [showModal, setShowModal] = useState(false); // State to control modal visibility
+  const [walkTime, setWalkTime] = useState(0); // Add this state
+
 
 
   const fetchData = () => {
@@ -31,7 +36,8 @@ function App() {
   return (
     <div>
       <header className="header">
-        <h2>Lexington Avenue - 59th Street</h2>
+        <h1>Lexington Avenue - 59th Street</h1>
+        <button className="settings-button" onClick={() => setShowModal(true)}>⚙️</button>
         {/* Any additional header content */}
       </header>
       <div className="tabs-container">
@@ -52,13 +58,14 @@ function App() {
         {transitData
           .filter(item => 
             (directionFilter === 'all' || item.message.toLowerCase().includes(directionFilter.toLowerCase())) &&
-            item.minutes_until_arrival > 0
+            item.minutes_until_arrival > walkTime
           )
           .map((item, index) => (
             <TransitDataItem key={index} item={item} /> // Corrected component usage
           ))
         }
       </div>
+      {showModal && <SettingsModal walkTime={walkTime} setWalkTime={setWalkTime} closeModal={() => setShowModal(false)} />}
     </div>
   );
 }
